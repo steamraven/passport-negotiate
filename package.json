@@ -1,30 +1,36 @@
 {
   "name": "passport-negotiate",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Negotiate (kerberos) authentication strategy for Passport.",
   "main": "./lib/passport-negotiate",
   "scripts": {
-    "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
+    "test": "mocha --reporter spec --bail --check-leaks test/*test.js"
   },
   "repository": {
-  	"type":"git",
-  	"url":"git://github.com/dmansfield/passport-negotiate.git"
+    "type":"git",
+    "url":"git://github.com/dmansfield/passport-negotiate.git"
   },
   "bugs": {
-  	"url": "http://github.com/dmansfield/passport-negotiate/issues"
+    "url": "http://github.com/dmansfield/passport-negotiate/issues"
   },
   "keywords": [
     "node.js","passport","negotiate","kerberos","spnego","gssapi","authentication"
   ],
   "author": {
-  	"name":"David Mansfield"
-  	,"email":"dmansfield@gmail.com"
+    "name":"David Mansfield"
+    ,"email":"dmansfield@gmail.com"
   },
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-  	"pkginfo": "0.2.x",
-  	"kerberos": ">= 0.0.15",
-	"passport-strategy": "1.x.x"
-   }
+    "pkginfo": "0.2.x",
+    "kerberos": ">= 0.0.15",
+    "passport-strategy": "1.x.x"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-passport-strategy": "^1.0.1",
+    "make-node": "^0.3.5",
+    "mocha": "^5.2.0"
+  }
 }
