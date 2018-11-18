@@ -166,7 +166,7 @@ describe('Strategy', function() {
   });
 
   describe('authentication request with invalid token', function() {
-    var err;
+    var header;
 
     var strategy = new Strategy({}, function(principal, done){
       done(null, principal);
@@ -174,8 +174,8 @@ describe('Strategy', function() {
 
     before(function(done) {
       chai.passport.use(strategy)
-        .error(function(e) {
-          err = e;
+        .fail(function(h) {
+          header = h;
           done();
         })
         .req(function(r) {
@@ -183,12 +183,38 @@ describe('Strategy', function() {
         })
         .authenticate();
     });
-    it("should error with a string", function() {
-      expect(err).to.be.an.a('string')
+    it("should fail with a negotiate header", function() {
+      expect(header).to.equal("Negotiate")
     })
 
   });
+  describe('authentication request with malformed token', function() {
+    var header;
+  
+    var strategy = new Strategy({}, function(principal, done){
+      done(null, principal);
+    });
+  
+    before(function(done) {
+      chai.passport.use(strategy)
+        .fail(function(h) {
+          header = h;
+          done();
+        })
+        .req(function(r) {
+          set_headers(r, {authorization:'XXX'});
+        })
+        .authenticate();
+    });
+    it("should fail with a negotiate header", function() {
+      expect(header).to.equal("Negotiate")
+    })
+  
+  });
+ 
 });
+
+
 
 function set_headers(req, headers) {
   req.get = function (name) {
